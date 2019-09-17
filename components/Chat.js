@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, ImageBackground, Text, TextInput, Alert, TouchableOpacity, Button, View } from 'react-native';
 
 export default class Chat extends React.Component {
+  //this will put the users name in navigation bar
   static navigationOptions = ({ navigation }) =>{
     return {
       title: navigation.state.params.name,
