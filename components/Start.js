@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, ImageBackground, Text, TextInput, Alert, TouchableOpacity, Button, View } from 'react-native';
+import { StyleSheet, Platform, ImageBackground, Text, TextInput, Alert, TouchableOpacity, Button, View } from 'react-native';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
 
 export default class Start extends React.Component {
 
@@ -47,6 +48,7 @@ export default class Start extends React.Component {
           title="Start Chatting"
           onPress={() => this.props.navigation.navigate('Chat', { name: this.state.name, color: this.state.color})}
         />
+        {Platform.OS === 'android' ? <KeyboardSpacer /> : null }
       </View>
     </ImageBackground>
   );
