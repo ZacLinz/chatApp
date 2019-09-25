@@ -12,20 +12,24 @@ import {
   Platform
 } from "react-native";
 import { GiftedChat } from "react-native-gifted-chat";
-const firebase = require("firebase");
-require("firebase/firestore");
+import firebase from "firebase";
+import "firebase/firestore";
 
 export default class Chat extends React.Component {
   constructor(props) {
     super(props);
-    firebase.initializeApp({
+
+    let firebaseConfig = {
       apiKey: "AIzaSyAPPB1RjDE43q61ee-YBA4dVMV1rH2UW9M",
       authDomain: "chatapp-a9af6.firebaseapp.com",
       databaseURL: "https://chatapp-a9af6.firebaseio.com",
       projectId: "chatapp-a9af6",
       storageBucket: "chatapp-a9af6.appspot.com",
-      messagingSenderId: "761937547166"
-    });
+      messagingSenderId: "761937547166",
+      appId: "1:761937547166:web:8fe9859120960ca9cfd08f"}
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
 
     this.referenceMessageUser = null;
     this.referenceMessages = firebase.firestore().collection('messages')
@@ -43,13 +47,21 @@ export default class Chat extends React.Component {
     };
   };
 
+  get user() {
+    return {
+      name: this.props.navigation.state.params.name,
+      _id: this.state.uid,
+      id: this.state.uid,
+    }
+  }
+
   onCollectionUpdate = (querySnapshot) => {
-    const messages = [];
+    const message = [];
     // go through each document
     querySnapshot.forEach(doc => {
       // get the QueryDocumentSnapshot's data
       var data = doc.data();
-      messages.push({
+      message.push({
         _id: data._id,
         text: data.text,
         createdAt: date.createdAt.toDate(),
@@ -66,12 +78,12 @@ export default class Chat extends React.Component {
   addMessage() {
     const message = this.state.messages[0];
     this.referenceMessages.add({
-      _id: message._id,
-      text: message.text,
-      createdAt: message.createdAt,
-      user: message.user,
-      image: message.image,
-      location: message.location
+      _id: this.state.messages[0]._id,
+      text: this.state.messages[0].text || '',
+      createdAt: this.state.messages[0].createdAt,
+      user: this.state.messages[0].user,
+      image: this.state.messages[0].image || '',
+      location: this.state.messages[0].location || null
     });
   }
 
@@ -88,9 +100,9 @@ export default class Chat extends React.Component {
 
   componentDidMount() {
     // listen to authentication events
-    this.authUnsubscribe = firebase.auth().onAuthStateChanged(user => {
+    this.authUnsubscribe = firebase.auth().onAuthStateChanged(async user => {
       if (!user) {
-        firebase.auth().signInAnonymously();
+        await firebase.auth().signInAnonymously();
       }
       //update user state with currently active user data
       this.setState({
@@ -123,7 +135,7 @@ export default class Chat extends React.Component {
         <GiftedChat
           messages={this.state.messages}
           onSend={messages => this.onSend(messages)}
-          user={{ _id: 1 }}
+          user={this.user}
         />
         {Platform.OS === "android" ? <KeyboardSpacer /> : null}
       </View>

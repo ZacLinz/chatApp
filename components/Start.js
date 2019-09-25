@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, Platform, ImageBackground, Text, TextInput, Alert, TouchableOpacity, Button, View } from 'react-native';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
+const firebase = require("firebase");
+require("firebase/firestore");
 
 export default class Start extends React.Component {
 
