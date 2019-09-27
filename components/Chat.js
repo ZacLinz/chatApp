@@ -16,19 +16,20 @@ import firebase from "firebase";
 import "firebase/firestore";
 
 export default class Chat extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
-    let firebaseConfig = {
-      apiKey: "AIzaSyAPPB1RjDE43q61ee-YBA4dVMV1rH2UW9M",
-      authDomain: "chatapp-a9af6.firebaseapp.com",
-      databaseURL: "https://chatapp-a9af6.firebaseio.com",
-      projectId: "chatapp-a9af6",
-      storageBucket: "chatapp-a9af6.appspot.com",
-      messagingSenderId: "761937547166",
-      appId: "1:761937547166:web:8fe9859120960ca9cfd08f"}
+
     if (!firebase.apps.length) {
-      firebase.initializeApp(firebaseConfig);
+      firebase.initializeApp({
+        apiKey: "AIzaSyAPPB1RjDE43q61ee-YBA4dVMV1rH2UW9M",
+        authDomain: "chatapp-a9af6.firebaseapp.com",
+        databaseURL: "https://chatapp-a9af6.firebaseio.com",
+        projectId: "chatapp-a9af6",
+        storageBucket: "chatapp-a9af6.appspot.com",
+        messagingSenderId: "761937547166",
+        appId: "1:761937547166:web:8fe9859120960ca9cfd08f"
+      })
     }
 
     this.referenceMessageUser = null;
@@ -76,14 +77,13 @@ export default class Chat extends React.Component {
   };
 
   addMessage() {
-    const message = this.state.messages[0];
-    this.referenceMessages.add({
-      _id: this.state.messages[0]._id,
-      text: this.state.messages[0].text || '',
-      createdAt: this.state.messages[0].createdAt,
-      user: this.state.messages[0].user,
-      image: this.state.messages[0].image || '',
-      location: this.state.messages[0].location || null
+      this.referenceMessages.add({
+        _id: this.state.messages[0]._id,
+        text: this.state.messages[0].text || '',
+        createdAt: this.state.messages[0].createdAt,
+        user: this.state.messages[0].user,
+        image: this.state.messages[0].image || '',
+        location: this.state.messages[0].location || null
     });
   }
 
