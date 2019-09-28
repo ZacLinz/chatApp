@@ -28,7 +28,8 @@ export default class Chat extends React.Component {
         projectId: "chatapp-a9af6",
         storageBucket: "chatapp-a9af6.appspot.com",
         messagingSenderId: "761937547166",
-        appId: "1:761937547166:web:8fe9859120960ca9cfd08f"
+        appId: "1:761937547166:web:8fe9859120960ca9cfd08f",
+        measurementId: "G-FH7JX8GNCG"
       })
     }
 
@@ -57,16 +58,16 @@ export default class Chat extends React.Component {
   }
 
   onCollectionUpdate = (querySnapshot) => {
-    const message = [];
+    const messages = [];
     // go through each document
     querySnapshot.forEach(doc => {
       // get the QueryDocumentSnapshot's data
       var data = doc.data();
-      message.push({
+      messages.push({
         _id: data._id,
         text: data.text,
         createdAt: data.createdAt.toDate(),
-        user: data.user,
+        user: data.user.toString(),
         image: data.image,
         location: data.location
       });
@@ -77,7 +78,7 @@ export default class Chat extends React.Component {
   };
 
   addMessage() {
-    console.log(this.state)
+    console.log(this.state.messages[0])
       this.referenceMessages.add({
         _id: this.state.messages._id,
         text: this.state.messages.text || '',
@@ -113,10 +114,20 @@ export default class Chat extends React.Component {
       });
 
       // create a reference to the active user's documents (messages)
-      this.referenceMessages = firebase.firestore().collection("messages").where("uid", "==", this.state.uid);
+      this.referenceMessageUser = firebase.firestore().collection("messages").where("uid", "==", this.state.uid);
       // listen for collection changes for current user
       this.unsubscribeMessageUser = this.referenceMessageUser.onSnapshot(this.onCollectionUpdate);
     });
+    this.setState({
+    messages: [
+      {
+      _id: 2,
+      text: this.props.navigation.state.params.name + " has entered the chat",
+      createdAt: new Date(),
+      system: true,
+    }
+    ]
+  })
   }
 
   componentWillUnmount() {
