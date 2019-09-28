@@ -67,7 +67,7 @@ export default class Chat extends React.Component {
         _id: data._id,
         text: data.text,
         createdAt: data.createdAt.toDate(),
-        user: data.user.toString(),
+        user: data.user,
         image: data.image,
         location: data.location
       });
@@ -80,12 +80,12 @@ export default class Chat extends React.Component {
   addMessage() {
     console.log(this.state.messages[0])
       this.referenceMessages.add({
-        _id: this.state.messages._id,
-        text: this.state.messages.text || '',
-        createdAt: this.state.messages.createdAt,
+        _id: this.state.messages[0]._id,
+        text: this.state.messages[0].text || '',
+        createdAt: this.state.messages[0].createdAt,
         user: [this.state.uid, this.props.navigation.state.params.name, ''],
-        image: this.state.messages.image || '',
-        location: this.state.messages.location || null,
+        image: this.state.messages[0].image || '',
+        location: this.state.messages[0].location || null,
         uid: this.state.uid,
     });
   }
@@ -114,7 +114,7 @@ export default class Chat extends React.Component {
       });
 
       // create a reference to the active user's documents (messages)
-      this.referenceMessageUser = firebase.firestore().collection("messages").where("uid", "==", this.state.uid);
+      this.referenceMessageUser = firebase.firestore().collection("messages");
       // listen for collection changes for current user
       this.unsubscribeMessageUser = this.referenceMessageUser.onSnapshot(this.onCollectionUpdate);
     });
