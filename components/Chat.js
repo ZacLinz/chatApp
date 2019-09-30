@@ -68,8 +68,6 @@ export default class Chat extends React.Component {
         text: data.text,
         createdAt: data.createdAt.toDate(),
         user: data.user,
-        image: data.image,
-        location: data.location
       });
     });
     this.setState({
@@ -78,14 +76,12 @@ export default class Chat extends React.Component {
   };
 
   addMessage() {
-    console.log(this.state.messages[0])
+    console.log(this.state.messages[0].user)
       this.referenceMessages.add({
         _id: this.state.messages[0]._id,
         text: this.state.messages[0].text || '',
         createdAt: this.state.messages[0].createdAt,
-        user: [this.state.uid, this.props.navigation.state.params.name, ''],
-        image: this.state.messages[0].image || '',
-        location: this.state.messages[0].location || null,
+        user: this.state.messages[0].user,
         uid: this.state.uid,
     });
   }
@@ -148,7 +144,7 @@ export default class Chat extends React.Component {
         <GiftedChat
           messages={this.state.messages}
           onSend={messages => this.onSend(messages)}
-          user={this.user}
+          user={this.state.user}
         />
         {Platform.OS === "android" ? <KeyboardSpacer /> : null}
       </View>
