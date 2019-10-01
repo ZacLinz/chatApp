@@ -137,8 +137,6 @@ export default class Chat extends React.Component {
 
   componentDidMount() {
     // listen to authentication events
-    this.getMessages();
-    console.log(this.state.messages);
     NetInfo.isConnected.fetch().then(isConnected => {
       if (isConnected == true) {
         console.log('online');
