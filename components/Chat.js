@@ -13,7 +13,7 @@ import {
   NetInfo,
   AsyncStorage
 } from "react-native";
-import { GiftedChat, InputToolbar } from "react-native-gifted-chat";
+import { GiftedChat, Bubble, InputToolbar } from "react-native-gifted-chat";
 import CustomActions from './CustomActions';
 import firebase from "firebase";
 import "firebase/firestore";
@@ -188,6 +188,22 @@ export default class Chat extends React.Component {
   }
 
   //Gifted Chat functions
+  renderBubble(props) {
+  return (
+    <Bubble
+      {...props}
+      wrapperStyle={{
+        right: {
+          backgroundColor: '#123458'
+        },
+        left: {
+          backgroundColor: '#6495ED'
+        }
+      }}
+    />
+  )
+}
+
   renderInputToolbar(props){
     if (this.state.isConnected == false){
     } else {
@@ -204,20 +220,12 @@ export default class Chat extends React.Component {
  };
 
  renderCustomView (props) {
-   const { currentMessage} = props;
+   const { currentMessage } = props;
    if (currentMessage.location) {
      return (
          <MapView
-           style={{width: 150,
-             height: 100,
-             borderRadius: 13,
-             margin: 3}}
-           region={{
-             latitude: currentMessage.location.latitude,
-             longitude: currentMessage.location.longitude,
-             latitudeDelta: 0.0922,
-             longitudeDelta: 0.0421,
-           }}
+           style={{width: 150, height: 100, borderRadius: 13, margin: 3}}
+           region={{latitude: currentMessage.location.latitude, longitude: currentMessage.location.longitude, latitudeDelta: 0.0922, longitudeDelta: 0.0421}}
          />
      );
    }
@@ -233,6 +241,7 @@ export default class Chat extends React.Component {
         }}
       >
         <GiftedChat
+          renderBubble={this.renderBubble.bind(this)}
           renderInputToolbar={this.renderInputToolbar.bind(this)}
           renderActions={this.renderCustomActions.bind(this)}
           renderCustomView={this.renderCustomView}
