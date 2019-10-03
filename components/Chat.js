@@ -14,8 +14,11 @@ import {
   AsyncStorage
 } from "react-native";
 import { GiftedChat, InputToolbar } from "react-native-gifted-chat";
+import CustomActions from './CustomActions';
 import firebase from "firebase";
 import "firebase/firestore";
+import { MapView } from 'react-native-maps';
+
 
 export default class Chat extends React.Component {
   constructor() {
@@ -76,6 +79,8 @@ export default class Chat extends React.Component {
         text: data.text,
         createdAt: data.createdAt.toDate(),
         user: data.user,
+        image: data.image || '',
+        location: data.location || null,
       });
     });
     this.setState({
@@ -91,6 +96,8 @@ export default class Chat extends React.Component {
         createdAt: this.state.messages[0].createdAt,
         user: this.state.user,
         uid: this.state.uid,
+        image: this.state.messages[0].image || '',
+        location: this.state.messages[0].location || null,
     });
   }
 
@@ -192,6 +199,31 @@ export default class Chat extends React.Component {
     }
   }
 
+  renderCustomActions = (props) => {
+   return <CustomActions {...props} />;
+ };
+
+ renderCustomView (props) {
+   const { currentMessage} = props;
+   if (currentMessage.location) {
+     return (
+         <MapView
+           style={{width: 150,
+             height: 100,
+             borderRadius: 13,
+             margin: 3}}
+           region={{
+             latitude: currentMessage.location.latitude,
+             longitude: currentMessage.location.longitude,
+             latitudeDelta: 0.0922,
+             longitudeDelta: 0.0421,
+           }}
+         />
+     );
+   }
+   return null;
+ }
+
   render() {
     return (
       <View
@@ -202,6 +234,8 @@ export default class Chat extends React.Component {
       >
         <GiftedChat
           renderInputToolbar={this.renderInputToolbar.bind(this)}
+          renderActions={this.renderCustomActions.bind(this)}
+          renderCustomView={this.renderCustomView}
           messages={this.state.messages}
           onSend={messages => this.onSend(messages)}
           user={this.state.user}
