@@ -10,10 +10,10 @@ import {
   Button,
   View,
   Platform,
-  NetInfo,
   AsyncStorage
 } from "react-native";
 import { GiftedChat, Bubble, InputToolbar } from "react-native-gifted-chat";
+import NetInfo from '@react-native-community/netinfo';
 import CustomActions from './CustomActions';
 import firebase from "firebase";
 import "firebase/firestore";
@@ -60,7 +60,7 @@ export default class Chat extends React.Component {
     };
   };
 
-//allows default values to be set for a users name and avatar 
+//allows default values to be set for a users name and avatar
   setUser = (_id, name = 'Guest User', avatar = 'https://placeimg.com/140/140/any') => {
     this.setState({
       user: {

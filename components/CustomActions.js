@@ -11,7 +11,6 @@ import {
   Button,
   View,
   Platform,
-  NetInfo,
   AsyncStorage
 } from "react-native";
 import { GiftedChat, InputToolbar } from "react-native-gifted-chat";
