@@ -17,7 +17,7 @@ import NetInfo from '@react-native-community/netinfo';
 import CustomActions from './CustomActions';
 import firebase from "firebase";
 import "firebase/firestore";
-import { MapView } from 'react-native-maps';
+import MapView from 'react-native-maps';
 
 
 export default class Chat extends React.Component {
