@@ -28,6 +28,7 @@ export default class CustomActions extends React.Component {
 
 
   pickImage = async () => {
+    try{
     const {status} = await Permissions.askAsync(Permissions.CAMERA_ROLL);
 
     if(status === 'granted'){
@@ -40,9 +41,13 @@ export default class CustomActions extends React.Component {
         this.props.onSend({ image: imageUrl})
       }
     }
+  } catch (error){
+    console.log(error.message)
   }
+}
 
-  takePhoto = async () =>{
+  takePhoto = async () => {
+    try{
     const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL, Permissions.CAMERA);
       if(status === 'granted'){
         let result = await ImagePicker.launchCameraAsync({
@@ -53,9 +58,13 @@ export default class CustomActions extends React.Component {
           this.props.onSend({ image: imageUrl})
         }
       }
+    } catch(error){
+      console.log(error.message)
     }
+  }
 
   getLocation = async () => {
+    try{
     const { status } = await Permissions.askAsync(Permissions.LOCATION);
 
     if(status === 'granted'){
@@ -71,9 +80,13 @@ export default class CustomActions extends React.Component {
         })
       }
     }
+  } catch(error){
+    console.log(error)
   }
+}
 
   uploadImage = async (uri) => {
+    try{
     const blob = await new Promise((resolve, reject) =>{
       const xhr = new XMLHttpRequest();
       xhr.onload = function(){
@@ -96,7 +109,10 @@ export default class CustomActions extends React.Component {
     blob.close();
     const imageUrl = await snapshot.ref.getDownloadURL();
     return imageUrl;
+  }catch(error){
+    console.log(error)
   }
+}
 
 
 

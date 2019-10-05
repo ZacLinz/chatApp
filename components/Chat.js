@@ -73,7 +73,7 @@ export default class Chat extends React.Component {
     // go through each document
     querySnapshot.forEach(doc => {
       // get the QueryDocumentSnapshot's data
-      var data = doc.data();
+      let data = doc.data();
       messages.push({
         _id: data._id,
         text: data.text,
@@ -219,7 +219,7 @@ export default class Chat extends React.Component {
    return <CustomActions {...props} />;
  };
 
- renderCustomView (props) {
+ renderCustomView(props){
    const { currentMessage } = props;
    if (currentMessage.location) {
      return (
@@ -244,7 +244,7 @@ export default class Chat extends React.Component {
           renderBubble={this.renderBubble.bind(this)}
           renderInputToolbar={this.renderInputToolbar.bind(this)}
           renderActions={this.renderCustomActions.bind(this)}
-          renderCustomView={this.renderCustomView}
+          renderCustomView={this.renderCustomView.bind(this)}
           messages={this.state.messages}
           onSend={messages => this.onSend(messages)}
           user={this.state.user}
