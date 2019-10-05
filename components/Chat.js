@@ -175,7 +175,7 @@ export default class Chat extends React.Component {
       // create a reference to the active user's documents (messages)
         this.referenceMessageUser = firebase.firestore().collection("messages");
         // listen for collection changes for current user
-        this.unsubscribeMessageUser = this.referenceMessageUser.onSnapshot(this.onCollectionUpdate);
+        this.unsubscribeMessageUser = this.referenceMessageUser.orderBy('createdAt', 'desc').onSnapshot(this.onCollectionUpdate);
       });
     } else {
       console.log('offline');
