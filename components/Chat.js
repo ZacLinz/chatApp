@@ -60,12 +60,15 @@ export default class Chat extends React.Component {
     };
   };
 
-  get user() {
-    return {
-      name: this.props.navigation.state.params.name,
-      _id: this.state.uid,
-      id: this.state.uid,
-    }
+//allows default values to be set for a users name and avatar 
+  setUser = (_id, name = 'Guest User', avatar = 'https://placeimg.com/140/140/any') => {
+    this.setState({
+      user: {
+        _id: _id,
+        name: name,
+        avatar: avatar,
+      }
+    })
   }
 
   onCollectionUpdate = (querySnapshot) => {
@@ -155,15 +158,19 @@ export default class Chat extends React.Component {
             await firebase.auth().signInAnonymously();
           }
           //update user state with currently active user data
+          if(!this.props.navigation.state.params.name){
+          this.setUser(user.uid );
           this.setState({
             uid: user.uid,
-            user: {
-              _id: user.uid,
-              name: this.props.navigation.state.params.name,
-              avatar: '',
-            },
             loggedInText: "Hello there"
           });
+        }else{
+          this.setUser(user.uid, this.props.navigation.state.params.name )
+          this.setState({
+            uid: user.uid,
+            loggedInText: "Hello there"
+          });
+        }
 
       // create a reference to the active user's documents (messages)
         this.referenceMessageUser = firebase.firestore().collection("messages");
