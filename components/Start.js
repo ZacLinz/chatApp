@@ -20,6 +20,8 @@ export default class Start extends React.Component {
       <Text style={styles.title}>Chat App</Text>
       <View style={styles.container}>
         <TextInput style={styles.nameBox}
+          accessible={true}
+          accessibilityLabel='Input name'
           onChangeText={(name) => this.setState({name})}
           value={this.state.name}
           placeholder='Your Name'
@@ -46,6 +48,8 @@ export default class Start extends React.Component {
           />
         </View>
         <Button
+          accessible={true}
+          accessibilityLabel="start chatting"
           style={styles.button}
           title="Start Chatting"
           onPress={() => this.props.navigation.navigate('Chat', { name: this.state.name, color: this.state.color})}
