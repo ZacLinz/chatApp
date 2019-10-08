@@ -42,4 +42,6 @@ click on "Authentication", "set up sign-in method" and enable anonymous authenti
 
 click on "storage" to set up cloud storage</br>
 
-finally, click on the gear just above the Develop tab, and select "project settings". Click on the button that will add Firebase to a web app, name it, and copy everything in the firebaseConfig and paste into the Chat.js file. 
+finally, click on the gear just above the Develop tab, and select "project settings". Click on the button that will add Firebase to a web app, name it, and copy everything in the firebaseConfig and paste into the Chat.js file.</br>
+
+[Kanban board](https://trello.com/b/YPTtvu1G/chat-app) 
