@@ -8,7 +8,7 @@ To run, you must first install expo. You can do this by running:
 
 To install all dependencies, you can run:
 
-### `npm install --save @react-native-community/netinfo @types/react-native-keyboard-spacer expo-image-picker expo-location expo-permissions firebase prop-types react react-dom react-native react-native-gesture-handler react-native-gifted-chat react-native-keyboard-spacer react-native-maps react-native-web react-navigation react-navigation-stack`
+npm install --save @react-native-community/netinfo @types/react-native-keyboard-spacer expo-image-picker expo-location expo-permissions firebase prop-types react react-dom react-native react-native-gesture-handler react-native-gifted-chat react-native-keyboard-spacer react-native-maps react-native-web react-navigation react-navigation-stack
 
 You can then get the app to start by running:
 
@@ -44,4 +44,4 @@ click on "storage" to set up cloud storage</br>
 
 finally, click on the gear just above the Develop tab, and select "project settings". Click on the button that will add Firebase to a web app, name it, and copy everything in the firebaseConfig and paste into the Chat.js file.</br>
 
-[Kanban board](https://trello.com/b/YPTtvu1G/chat-app) 
+[Kanban board](https://trello.com/b/YPTtvu1G/chat-app)
