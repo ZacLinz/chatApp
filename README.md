@@ -22,26 +22,26 @@ For information on how to set up an emulator for testing, you can visit [this pa
 
 You should also set up firebase account for your own use. To do this follow these steps: </br>
 
-go [here](https://firebase.google.com/?hl=en)</br>
+1. go [here](https://firebase.google.com/?hl=en)
 
-sign into your google account</br>
+2. sign into your google account</br>
 
-click on "Go to console"</br>
+3. click on "Go to console"</br>
 
-click "add project"</br>
+4. click "add project"</br>
 
-follow onscreen instructions until it says "creating your project"</br>
+5. follow onscreen instructions until it says "creating your project"</br>
 
-click on "database" on the Develop tab </br>
+6. click on "database" on the Develop tab </br>
 
-click on "Create Database" and select "start in test mode"</br>
+7. click on "Create Database" and select "start in test mode"</br>
 
-click on "start collection" and name it "messages" and then press "auto id" and confirm on the following screen</br>
+8. click on "start collection" and name it "messages" and then press "auto id" and confirm on the following screen</br>
 
-click on "Authentication", "set up sign-in method" and enable anonymous authentication</br>
+9. click on "Authentication", "set up sign-in method" and enable anonymous authentication</br>
 
-click on "storage" to set up cloud storage</br>
+10. click on "storage" to set up cloud storage</br>
 
-finally, click on the gear just above the Develop tab, and select "project settings". Click on the button that will add Firebase to a web app, name it, and copy everything in the firebaseConfig and paste into the Chat.js file.</br>
+11. finally, click on the gear just above the Develop tab, and select "project settings". Click on the button that will add Firebase to a web app, name it, and copy everything in the firebaseConfig and paste into the Chat.js file.</br>
 
 [Kanban board](https://trello.com/b/YPTtvu1G/chat-app)
