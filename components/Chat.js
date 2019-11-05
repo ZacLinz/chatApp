@@ -12,6 +12,7 @@ import CustomActions from './CustomActions';
 import firebase from "firebase";
 import "firebase/firestore";
 import MapView from 'react-native-maps';
+import config from "config";
 
 /**
 * @class chat
@@ -42,16 +43,7 @@ export default class Chat extends React.Component {
     */
 
     if (!firebase.apps.length) {
-      firebase.initializeApp({
-        apiKey: "AIzaSyAPPB1RjDE43q61ee-YBA4dVMV1rH2UW9M",
-        authDomain: "chatapp-a9af6.firebaseapp.com",
-        databaseURL: "https://chatapp-a9af6.firebaseio.com",
-        projectId: "chatapp-a9af6",
-        storageBucket: "chatapp-a9af6.appspot.com",
-        messagingSenderId: "761937547166",
-        appId: "1:761937547166:web:8fe9859120960ca9cfd08f",
-        measurementId: "G-FH7JX8GNCG"
-      })
+      firebase.initializeApp({config})
     }
 
     this.referenceMessageUser = null;
